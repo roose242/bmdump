@@ -13,7 +13,7 @@ requires python 3 and hid (ctypes bindings for hidapi)
 
 read https://pypi.org/project/hid/
 
-keep in mind that connecting to the usb device may need special permissions
+In case of permission issues read the hints at the bottom of this document.
 
 
 **usage**
@@ -36,3 +36,19 @@ optional arguments:
   -s CHAR, --delimiter CHAR
                         data delimiter
 ```
+
+**permissions**
+
+keep in mind that connecting to the usb device may need special permissions
+
+You may need to add a new udev rules file:
+
+/etc/udev/rules.d/10-bm58.rules
+
+with the following content:
+
+```
+SUBSYSTEM=="usb", ACTION=="add", ENV{PRODUCT}="c45/7406/170", OWNER="YOUR_USER"
+```
+
+(replace *YOUR_USER* with your user name)
